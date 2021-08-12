@@ -40,9 +40,9 @@ const App = () => {
 
   const completeAll = () => {
     tasks.filter((item) => item.status !== "completed").length !== 0
-      ? setTasks(tasks.map(item=>({...item, status:'completed'})))
+      ? setTasks(tasks.map(obj=>({...obj, status:'completed'})))
       : setTasks(
-          tasks.map(item=>({...item, status:'active'}))
+          tasks.map(obj=>({...obj, status:'active'}))
         );
   };
 
