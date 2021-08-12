@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo } from "./actions/addTodo";
 
 const CreateTask = (props) => {
-  const value = props.value;
-  const handleChange = props.handleChange;
-  const handleClick = props.handleClick;
-  
+  const [value, setValue] = useState("");
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  const handleClick = () => {
+    if (value) {
+      dispatch(addTodo(value));
+    }
+    setValue("");
+  };
+
   return (
     <div className="createTask-field">
       <input
