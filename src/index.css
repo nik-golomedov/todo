@@ -1,0 +1,137 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto Slab", serif, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(255, 145, 145);
+  box-sizing: border-box;
+}
+
+ul {
+  padding: 0;
+}
+.todo__header {
+  font-size: 42px;
+}
+.task-item {
+  font-size: 24px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.task-item:hover .icons-container {
+  opacity: 1;
+}
+.task-item label {
+  display: block;
+  width: 100%;
+  word-break: break-all;
+  text-align: start;
+  cursor: pointer;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.btn {
+  width: 100px;
+  height: 55px;
+  background-color: rgb(241, 70, 70);
+  border: none;
+  color: #333;
+  padding: 30px auto;
+  cursor: pointer;
+}
+
+.btn:active {
+  background-color: rgb(236, 85, 186);
+}
+.completed {
+  text-decoration: line-through;
+  opacity: 0.4;
+}
+.todo-container {
+  max-width: 900px;
+  margin: 150px auto 0;
+  text-align: center;
+}
+.createTask-field {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  padding-left: 10px;
+  font-size: 26px;
+  width: 100%;
+  min-width: 15rem;
+  height: 5vh;
+}
+.createTask-field input::placeholder {
+  color: rgb(88, 44, 44);
+  opacity: 0.4;
+}
+.icons-container {
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.todo-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+}
+.todo-footer__btn {
+  width: 100px;
+  height: 30px;
+  color: black;
+  cursor: pointer;
+  padding: 30px auto;
+  border: 1px solid rgb(255, 145, 145);
+  background-color: rgb(255, 145, 145);
+}
+.todo-footer__btn:active {
+  border: 1px solid brown;
+}
+.selected {
+  border: 1px solid brown;
+}
+.todo-footer__btn-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.todo__clear-completed:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+@media (min-width: 320px) and (max-width: 1279px) {
+  .createTask-field {
+    flex-flow: column;
+  }
+  .btn {
+    width: 100%;
+  }
+  .input {
+    padding: 0;
+    text-indent: 10px;
+  }
+  .task-item {
+    margin-left: 5px;
+  }
+  .todo-footer__btn-container {
+    flex-flow: column;
+  }
+}
