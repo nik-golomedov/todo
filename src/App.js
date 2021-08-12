@@ -40,14 +40,12 @@ const App = () => {
 
   const completeAll = () => {
     tasks.filter((item) => item.status !== "completed").length !== 0
-      ? setTasks(
-          tasks.map((item) => (item = { text: item.text, status: "completed" }))
-        )
+      ? setTasks(tasks.map(item=>({...item, status:'completed'})))
       : setTasks(
-          tasks.map((item) => (item = { text: item.text, status: "active" }))
+          tasks.map(item=>({...item, status:'active'}))
         );
   };
-  
+
   const deleteTask = (id) => {
     setTasks(tasks.filter((item, index) => id !== index));
   };
