@@ -35,14 +35,19 @@ const App = () => {
       }
       return newState;
     });
+    setCompletedTask(tasks.filter((item) => item.status === "completed"));
   };
 
   const completeAll = () => {
-    // tasks.filter((item) => item.status === "completed").length === 0
-    setTasks(tasks.map((item) => (item.status = "completed")));
-    //  setTasks(tasks.map((item) => (item.status = "active")));
+    tasks.filter((item) => item.status !== "completed").length !== 0
+      ? setTasks(
+          tasks.map((item) => (item = { text: item.text, status: "completed" }))
+        )
+      : setTasks(
+          tasks.map((item) => (item = { text: item.text, status: "active" }))
+        );
   };
-
+  
   const deleteTask = (id) => {
     setTasks(tasks.filter((item, index) => id !== index));
   };

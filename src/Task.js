@@ -22,7 +22,6 @@ const Task = ({
     editTask(index, newValue);
     setEditMode(false);
   };
-  console.log(item);
   const view = (
     <React.Fragment>
       <li className="task-item">
