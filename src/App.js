@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCompleted } from "./actions/clearCompleted";
 import { completeAllTodo } from "./actions/completeAllTodo";
 import CreateTask from "./CreateTask";
 import Task from "./Task";
+import {
+  selectActiveTask,
+  selectAllTask,
+  selectCompletedTask,
+  selectFilterStatus,
+} from "./selectors/selectors";
+import { switchFilterStatus } from "./actions/switchFilterStatus";
 
 const App = () => {
-  const [completedTask, setCompletedTask] = useState([]);
-  const [filterStatus, setFilterStatus] = useState("all");
   const dispatch = useDispatch();
-  const tasks = useSelector((state) => state.todos);
-  console.log(tasks);
-
-  useEffect(() => {
-    setCompletedTask(tasks.filter((item) => item.status === "completed"));
-  }, [tasks]);
+  const tasks = useSelector(selectAllTask);
+  const completedTask = useSelector(selectCompletedTask);
+  const activeTask = useSelector(selectActiveTask);
+  const filterStatus = useSelector(selectFilterStatus);
 
   const listTasks = tasks.map((item, index) => (
     <Task key={index} item={item} index={index} />
@@ -31,57 +34,54 @@ const App = () => {
         <CreateTask />
         {filterStatus === "all" && <ul>{listTasks}</ul>}
         <ul>{listFiltered}</ul>
-        <div className="todo-footer">
-          <div>
-            <span>
-              {tasks.filter((item) => item.status !== "completed").length} items
-              left
-            </span>
-            <button
-              className="todo-footer__btn"
-              onClick={() => dispatch(completeAllTodo())}
-            >
-              {tasks.filter((item) => item.status !== "completed").length !== 0
-                ? "Complete all"
-                : "Remove"}
-            </button>
-          </div>
+        {tasks.length !== 0 && (
+          <div className="todo-footer">
+            <div>
+              <span>{activeTask.length} items left</span>
+              <button
+                className="todo-footer__btn"
+                onClick={() => dispatch(completeAllTodo())}
+              >
+                {activeTask.length !== 0 ? "Complete all" : "Remove"}
+              </button>
+            </div>
 
-          <div className="todo-footer__btn-container">
-            <button
-              className={`todo-footer__btn ${
-                filterStatus === "all" && "selected"
-              }`}
-              onClick={() => setFilterStatus("all")}
-            >
-              All
-            </button>
-            <button
-              className={`todo-footer__btn ${
-                filterStatus === "active" && "selected"
-              }`}
-              onClick={() => setFilterStatus("active")}
-            >
-              Active
-            </button>
-            <button
-              className={`todo-footer__btn ${
-                filterStatus === "completed" && "selected"
-              }`}
-              onClick={() => setFilterStatus("completed")}
-            >
-              Completed
-            </button>
+            <div className="todo-footer__btn-container">
+              <button
+                className={`todo-footer__btn ${
+                  filterStatus === "all" && "selected"
+                }`}
+                onClick={() => dispatch(switchFilterStatus("all"))}
+              >
+                All
+              </button>
+              <button
+                className={`todo-footer__btn ${
+                  filterStatus === "active" && "selected"
+                }`}
+                onClick={() => dispatch(switchFilterStatus("active"))}
+              >
+                Active
+              </button>
+              <button
+                className={`todo-footer__btn ${
+                  filterStatus === "completed" && "selected"
+                }`}
+                onClick={() => dispatch(switchFilterStatus("completed"))}
+              >
+                Completed
+              </button>
+            </div>
+            {completedTask.length !== 0 && (
+              <button
+                className="todo__clear-completed todo-footer__btn"
+                onClick={() => dispatch(clearCompleted())}
+              >
+                Clear completed[{completedTask.length}]
+              </button>
+            )}
           </div>
-          {completedTask.length !== 0 && (
-            <span
-              className="todo__clear-completed"
-              onClick={() => dispatch(clearCompleted())}
-            >
-              Clear completed[{completedTask.length}]
-            </span>
-          )}
-        </div>
+        )}
       </section>
     </main>
   );

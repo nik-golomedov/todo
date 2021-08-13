@@ -4,6 +4,6 @@ export const editTodo = (payload, index) => {
   return {
     type: EDIT_TODO,
     text: payload,
-    index:index
+    index: index,
   };
 };

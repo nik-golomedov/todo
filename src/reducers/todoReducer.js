@@ -19,8 +19,7 @@ const todoReducer = (state = initialState, action) => {
       return editNewState;
     case SWITCH_TODO_STATUS:
       let switchNewState = [...state];
-      let currStatus = switchNewState[action.index].status;
-      if (currStatus === "active") {
+      if (switchNewState[action.index].status === "active") {
         switchNewState[action.index].status = "completed";
       } else {
         switchNewState[action.index].status = "active";

@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editTodo } from "./actions/editTodo";
+import { selectEditTodo } from "./selectors/selectors";
 
 const EditTask = ({ switchMode, index }) => {
   const dispatch = useDispatch();
-  const todo = useSelector((state) => state.todos[index].text);
+  const todo = useSelector(selectEditTodo(index));
   const [editValue, setEditValue] = useState(todo);
+
   const handleEditChange = (e) => {
     setEditValue(e.target.value);
   };
-  console.log(todo);
+
+  const saveEditTodo = () => {
+    dispatch(editTodo(editValue, index));
+    switchMode();
+  };
+
   return (
     <div key={index}>
       <input
@@ -18,14 +25,10 @@ const EditTask = ({ switchMode, index }) => {
         value={editValue}
         onChange={handleEditChange}
         onFocus={(e) => e.currentTarget.select()}
-        onBlur={() => {
-          dispatch(editTodo(editValue, index));
-          switchMode();
-        }}
+        onBlur={saveEditTodo}
         onKeyUp={(e) => {
           if (e.key === "Enter") {
-            dispatch(editTodo(editValue, index));
-            switchMode();
+            saveEditTodo();
           }
         }}
       ></input>

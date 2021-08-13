@@ -6,25 +6,15 @@ import { useDispatch } from "react-redux";
 import { deleteTodo } from "./actions/deleteTodo";
 import { switchTodoStatus } from "./actions/switchTodoStatus";
 
-const Task = ({
-  deleteTask,
-  editTask,
-  handleChange,
-  index,
-  item,
-  handleStatusClick,
-}) => {
+const Task = ({ index, item }) => {
   const [editMode, setEditMode] = useState(false);
   const completed = item.status === "completed" ? "completed" : "";
   const dispatch = useDispatch();
 
-  const saveEdit = (index, newValue) => {
-    editTask(index, newValue);
-    setEditMode(false);
-  };
   const switchMode = () => {
     setEditMode(false);
   };
+  
   const view = (
     <>
       <li className="task-item">
@@ -42,16 +32,8 @@ const Task = ({
     </>
   );
 
-  const edit = (
-    <EditTask
-      saveEdit={saveEdit}
-      value={item}
-      editTask={editTask}
-      index={index}
-      switchMode={switchMode}
-    />
-  );
+  const edit = <EditTask index={index} switchMode={switchMode} />;
   return editMode ? edit : view;
 };
 
-export default Task;
+export default Task ;
