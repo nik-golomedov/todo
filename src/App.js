@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import CreateTask from "./CreateTask";
-import Task from "./Task";
+import CreateTask from "./components/CreateTask";
+import Task from "./components/Task";
 
 const App = () => {
   const [value, setValue] = useState("");
@@ -63,6 +63,18 @@ const App = () => {
     setCompletedTask([]);
   };
 
+  const switchStatusFilterToAll = () => {
+    setFilterStatus("all")
+  };
+
+  const switchStatusFilterToActive = () => {
+    setFilterStatus("active")
+  };
+
+  const switchStatusFilterToCompleted = () => {
+    setFilterStatus("completed");
+  };
+
   const listTasks = tasks.map((item, index) => (
     <Task
       key={index}
@@ -118,7 +130,7 @@ const App = () => {
               className={`todo-footer__btn ${
                 filterStatus === "all" && "selected"
               }`}
-              onClick={() => setFilterStatus("all")}
+              onClick={switchStatusFilterToAll}
             >
               All
             </button>
@@ -126,7 +138,7 @@ const App = () => {
               className={`todo-footer__btn ${
                 filterStatus === "active" && "selected"
               }`}
-              onClick={() => setFilterStatus("active")}
+              onClick={switchStatusFilterToActive}
             >
               Active
             </button>
@@ -134,7 +146,7 @@ const App = () => {
               className={`todo-footer__btn ${
                 filterStatus === "completed" && "selected"
               }`}
-              onClick={() => setFilterStatus("completed")}
+              onClick={switchStatusFilterToCompleted}
             >
               Completed
             </button>

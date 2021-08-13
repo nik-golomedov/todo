@@ -22,6 +22,11 @@ const Task = ({
     editTask(index, newValue);
     setEditMode(false);
   };
+
+  const handleEditMode = () => {
+     setEditMode(true)
+  }
+
   const view = (
     <React.Fragment>
       <li className="task-item">
@@ -30,7 +35,7 @@ const Task = ({
         </label>
         <div className="icons-container">
           <GrClose onClick={() => deleteTask(index)}></GrClose>
-          <AiOutlineEdit onClick={() => setEditMode(true)}></AiOutlineEdit>
+          <AiOutlineEdit onClick={handleEditMode}></AiOutlineEdit>
         </div>
       </li>
     </React.Fragment>
