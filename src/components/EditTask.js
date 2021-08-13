@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editTodo } from "./actions/editTodo";
-import { selectEditTodo } from "./selectors/selectors";
+import { editTodo } from "../store/actions/editTodo";
+import { selectEditTodo } from "../store/selectors/selectors";
+import PropTypes from "prop-types";
 
 const EditTask = ({ switchMode, index }) => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const EditTask = ({ switchMode, index }) => {
     <div key={index}>
       <input
         className="todo__edit-input input"
-        autoFocus
+        autoFocus={true}
         value={editValue}
         onChange={handleEditChange}
         onFocus={(e) => e.currentTarget.select()}
@@ -35,5 +36,8 @@ const EditTask = ({ switchMode, index }) => {
     </div>
   );
 };
-
+EditTask.propTypes = {
+  index: PropTypes.number,
+  switchMode: PropTypes.func,
+};
 export default EditTask;

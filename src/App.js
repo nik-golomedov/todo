@@ -1,16 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCompleted } from "./actions/clearCompleted";
-import { completeAllTodo } from "./actions/completeAllTodo";
-import CreateTask from "./CreateTask";
-import Task from "./Task";
+import { clearCompleted } from "./store/actions/clearCompleted";
+import { completeAllTodo } from "./store/actions/completeAllTodo";
+import CreateTask from "./components/CreateTask";
+import Task from "./components/Task";
 import {
   selectActiveTask,
   selectAllTask,
   selectCompletedTask,
   selectFilterStatus,
-} from "./selectors/selectors";
-import { switchFilterStatus } from "./actions/switchFilterStatus";
+} from "./store/selectors/selectors";
+import { switchFilterStatus } from "./store/actions/switchFilterStatus";
 
 const App = () => {
   const dispatch = useDispatch();
