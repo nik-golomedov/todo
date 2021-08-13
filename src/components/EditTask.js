@@ -18,6 +18,16 @@ const EditTask = ({ switchMode, index }) => {
     switchMode();
   };
 
+  const selectTargetFocus = (e) => {
+    e.currentTarget.select();
+  };
+
+  const saveOnKey = (e) => {
+    if (e.key === "Enter") {
+      saveEditTodo();
+    }
+  };
+
   return (
     <div key={index}>
       <input
@@ -25,13 +35,9 @@ const EditTask = ({ switchMode, index }) => {
         autoFocus={true}
         value={editValue}
         onChange={handleEditChange}
-        onFocus={(e) => e.currentTarget.select()}
+        onFocus={selectTargetFocus}
         onBlur={saveEditTodo}
-        onKeyUp={(e) => {
-          if (e.key === "Enter") {
-            saveEditTodo();
-          }
-        }}
+        onKeyUp={saveOnKey}
       ></input>
     </div>
   );

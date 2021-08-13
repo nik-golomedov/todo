@@ -12,22 +12,27 @@ const Task = ({ index, item }) => {
   const completed = item.status === "completed" ? "completed" : "";
   const dispatch = useDispatch();
 
+  const deleteTask = (index) => {
+    dispatch(deleteTodo(index));
+  };
+
+  const switchTaskStatus = (index) => {
+    dispatch(switchTodoStatus(index));
+  };
+
   const switchMode = () => {
-    setEditMode(false);
+    setEditMode(editMode === false ? true : false);
   };
 
   const view = (
     <>
       <li className="task-item">
-        <label
-          className={completed}
-          onClick={() => dispatch(switchTodoStatus(index))}
-        >
+        <label className={completed} onClick={() => switchTaskStatus(index)}>
           {item.text}
         </label>
         <div className="icons-container">
-          <GrClose onClick={() => dispatch(deleteTodo(index))}></GrClose>
-          <AiOutlineEdit onClick={() => setEditMode(true)}></AiOutlineEdit>
+          <GrClose onClick={() => deleteTask(index)}></GrClose>
+          <AiOutlineEdit onClick={switchMode}></AiOutlineEdit>
         </div>
       </li>
     </>

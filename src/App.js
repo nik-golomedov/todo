@@ -19,6 +19,26 @@ const App = () => {
   const activeTask = useSelector(selectActiveTask);
   const filterStatus = useSelector(selectFilterStatus);
 
+  const switchStatusFilterToAll = () => {
+    dispatch(switchFilterStatus("all"));
+  };
+
+  const switchStatusFilterToActive = () => {
+    dispatch(switchFilterStatus("active"));
+  };
+
+  const switchStatusFilterToCompleted = () => {
+    dispatch(switchFilterStatus("completed"));
+  };
+
+  const clearCompletedTasks = () => {
+    dispatch(clearCompleted());
+  };
+  
+  const completeTasks = () => {
+    dispatch(completeAllTodo());
+  };
+
   const listTasks = tasks.map((item, index) => (
     <Task key={index} item={item} index={index} />
   ));
@@ -38,10 +58,7 @@ const App = () => {
           <div className="todo-footer">
             <div>
               <span>{activeTask.length} items left</span>
-              <button
-                className="todo-footer__btn"
-                onClick={() => dispatch(completeAllTodo())}
-              >
+              <button className="todo-footer__btn" onClick={completeTasks}>
                 {activeTask.length !== 0 ? "Complete all" : "Remove"}
               </button>
             </div>
@@ -51,7 +68,7 @@ const App = () => {
                 className={`todo-footer__btn ${
                   filterStatus === "all" && "selected"
                 }`}
-                onClick={() => dispatch(switchFilterStatus("all"))}
+                onClick={switchStatusFilterToAll}
               >
                 All
               </button>
@@ -59,7 +76,7 @@ const App = () => {
                 className={`todo-footer__btn ${
                   filterStatus === "active" && "selected"
                 }`}
-                onClick={() => dispatch(switchFilterStatus("active"))}
+                onClick={switchStatusFilterToActive}
               >
                 Active
               </button>
@@ -67,7 +84,7 @@ const App = () => {
                 className={`todo-footer__btn ${
                   filterStatus === "completed" && "selected"
                 }`}
-                onClick={() => dispatch(switchFilterStatus("completed"))}
+                onClick={switchStatusFilterToCompleted}
               >
                 Completed
               </button>
@@ -75,7 +92,7 @@ const App = () => {
             {completedTask.length !== 0 && (
               <button
                 className="todo__clear-completed todo-footer__btn"
-                onClick={() => dispatch(clearCompleted())}
+                onClick={clearCompletedTasks}
               >
                 Clear completed[{completedTask.length}]
               </button>

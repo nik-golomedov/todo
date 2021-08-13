@@ -17,6 +17,12 @@ const CreateTask = () => {
     setValue("");
   };
 
+  const enterOnKey = (e) => {
+    if (e.key === "Enter") {
+      handleClick();
+    }
+  };
+
   return (
     <div className="createTask-field">
       <input
@@ -24,9 +30,7 @@ const CreateTask = () => {
         value={value}
         className="createTask-input input"
         placeholder="Enter your task"
-        onKeyUp={(e) => {
-          e.key === "Enter" && handleClick();
-        }}
+        onKeyUp={enterOnKey}
       />
       <button onClick={handleClick} className="createTask-btn btn">
         Add
